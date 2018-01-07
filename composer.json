@@ -1,0 +1,23 @@
+{
+    "name": "mehrdad-dadkhah/php-file-finder",
+    "description": "simple package to search files and directories and return full path and related information",
+    "keywords": ["file", "search", "finder", "file_info"],
+    "homepage": "https://github.com/Mehrdad-Dadkhah/php-file-finder",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+	    "symfony/process": "^2.5|^3.0"
+    },
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Mehrdad Dadkhah",
+            "email": "mehrdad@dadkhah.me"
+        }
+    ],
+    "autoload": {
+	    "psr-4": {
+		    "MehrdadDadkhah\\File\\": "src/"
+	    }
+    }
+}
