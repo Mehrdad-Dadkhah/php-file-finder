@@ -31,7 +31,7 @@ class Finder
     {
         switch ($this->finder) {
             case 'locate':
-                return "locate $fileName -d $path";
+                return "locate $fileName";
                 break;
             
             default:
@@ -51,7 +51,7 @@ class Finder
     public function findFile(string $file, string $searchPath = '/home', $info = true): array
     {
         $fileInfo = new \SplFileInfo($file);
-        if (!empty($fileInfo->getPath())) {
+        if (!empty($fileInfo->getPath()) && $this->finder == 'finder') {
             $searchPath = $this->findDirectoryPath($fileInfo->getPath(), $searchPath);
 
             $searchPath = implode(' ', $searchPath);
