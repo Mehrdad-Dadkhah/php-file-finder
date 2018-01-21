@@ -6,6 +6,39 @@ use Symfony\Component\Process\Process;
 
 class Finder
 {
+    private $finder = 'find';
+
+    /**
+     * set finder
+     * 
+     * @param string $finder find module
+     */
+    public function setFinder($finder)
+    {
+        $this->finder = $finder;
+
+        return $this;
+    }
+
+    /**
+     * get find command
+     * 
+     * @param  string $path     search directory path
+     * @param  string $fileName search name
+     * @return string           command
+     */
+    public function getFindCommand(string $path, string $fileName): string
+    {
+        switch ($this->finder) {
+            case 'locate':
+                return "locate $fileName -d $path";
+                break;
+            
+            default:
+                return "find $path -name '$fileName'";
+                break;
+        }
+    }
 
     /**
      * search and find file
@@ -26,7 +59,7 @@ class Finder
             $file = $fileInfo->getBaseName();
         }
 
-        $command = "find $searchPath -name '$file'";
+        $command = $this->getFindCommand($searchPath, $file);
 
         $process = new Process($command);
         $process->run();
@@ -57,7 +90,7 @@ class Finder
 
         $directoryName = end($directories);
 
-        $command = "find $searchPath -name '$directoryName' | grep $path";
+        $command = $this->getFindCommand($searchPath, $directoryName) . " | grep $path";
 
         $process = new Process($command);
         $process->run();
