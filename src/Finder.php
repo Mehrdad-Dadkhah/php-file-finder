@@ -31,7 +31,7 @@ class Finder
     {
         switch ($this->finder) {
             case 'locate':
-                return "locate $fileName";
+                return "locate '$fileName'";
                 break;
             
             default:
@@ -64,7 +64,7 @@ class Finder
         $process = new Process($command);
         $process->run();
 
-        if (!$process->isSuccessful()) {
+        if (!$process->isSuccessful() && strlen($process->getErrorOutput()) > 2) {
             throw new ProcessFailedException($process);
         }
 

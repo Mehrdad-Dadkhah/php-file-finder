@@ -21,6 +21,12 @@ $finder = new Finder();
 
 ```
 
+can change finder, default is `find` and can change it to `locate`
+
+```PHP
+$finder->setFinder('locate');
+```
+
 find with filename and search all directories:
 
 ```PHP
